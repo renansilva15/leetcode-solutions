@@ -113,11 +113,10 @@ int *twoSum(int *nums, int numsSize, int target, int *returnSize)
 
   HashMap *hashMap = createHashMap(numsSize);
 
-  int complement, complementIndex;
   for (int i = 0; i < numsSize; i++)
   {
-    complement = target - nums[i];
-    complementIndex = getFromHashMap(hashMap, complement);
+    int complement = target - nums[i];
+    int complementIndex = getFromHashMap(hashMap, complement);
 
     if (complementIndex != -1)
     {
