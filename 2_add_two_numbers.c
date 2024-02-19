@@ -49,3 +49,60 @@ struct ListNode *addTwoNumbers(struct ListNode *l1, struct ListNode *l2)
 {
   return addTwoNumbersAux(l1, l2, 0);
 }
+
+void printList(struct ListNode *head)
+{
+  while (head != NULL)
+  {
+    printf("%d -> ", head->val);
+    head = head->next;
+  }
+  printf("NULL\n");
+}
+
+void freeList(struct ListNode *head)
+{
+  struct ListNode *temp;
+
+  while (head != NULL)
+  {
+    temp = head;
+    head = head->next;
+    free(temp);
+  }
+}
+
+int main()
+{
+  struct ListNode *l1 = (struct ListNode *)malloc(sizeof(struct ListNode));
+  struct ListNode *l2 = (struct ListNode *)malloc(sizeof(struct ListNode));
+
+  l1->val = 2;
+  l1->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+  l1->next->val = 4;
+  l1->next->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+  l1->next->next->val = 3;
+  l1->next->next->next = NULL;
+
+  l2->val = 5;
+  l2->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+  l2->next->val = 6;
+  l2->next->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+  l2->next->next->val = 4;
+  l2->next->next->next = NULL;
+
+  printf("List 1: ");
+  printList(l1);
+  printf("List 2: ");
+  printList(l2);
+
+  struct ListNode *result = addTwoNumbers(l1, l2);
+  printf("Result: ");
+  printList(result);
+
+  freeList(l1);
+  freeList(l2);
+  freeList(result);
+
+  return 0;
+}
